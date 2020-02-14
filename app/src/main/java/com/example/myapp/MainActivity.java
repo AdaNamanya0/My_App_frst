@@ -15,14 +15,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display_message);
+        setContentView(R.layout.activity_main);
 
-        Intent intent = getIntent();
-        String message = intent.getStringExtra("MESSAGE");
-
-        TextView messageView =
-                (TextView)findViewById(R.id.messageTextView);
-        messageView.setText(message);
     }
     public void sendMessage(View view) {
         EditText message = (EditText)findViewById(R.id.message);
