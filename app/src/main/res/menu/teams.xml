@@ -4,4 +4,6 @@
     <item android:id="@+id/fa_cup" android:title="FA cup"/>
     <item android:id="@+id/progee" android:title="Enjoy code"/>
     <item android:id="@+id/list_view" android:title="List view"/>
+    <item android:id="@+id/send_mail" android:title="Gmail"/>
+    <item android:id="@+id/call" android:title="MakeCall"/>
 </menu>
