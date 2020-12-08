@@ -1,16 +1,15 @@
 package com.example.myapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 public class best_teams extends AppCompatActivity {
+
     TextView textView;
     private Object CharSequence;
 
@@ -33,6 +32,6 @@ public class best_teams extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        textView.setText((CharSequence)str);
+        textView.setText((CharSequence) str);
     }
 }
