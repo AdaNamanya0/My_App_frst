@@ -23,12 +23,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
     public static String soccer = "http://www.premierlegue.com";
     public static String football = "http://www.thefa.com";
+
     //public static String message = "http://www.gmail.com";
     Button play;
     Button alrt;
+    private Button Start, Stop;
     private BroadcastReceiver MyReceiver= new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             //get baterry
@@ -49,12 +52,26 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         registerReceiver(MyReceiver,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
+        Start = (Button) findViewById(R.id.buttonStart);
+        Stop = (Button) findViewById(R.id.buttonStop);
+
+        Start.setOnClickListener((View.OnClickListener) this);
+        Stop.setOnClickListener((View.OnClickListener) this);
 
 
         play = findViewById(R.id.enjoy);
         play.setOnClickListener(new View.OnClickListener() {
+            private Object View;
+
             @Override
             public void onClick(View v) {
+                if (View == Start){
+                    Intent intent = new Intent(MainActivity.this,MyService.class);
+                    startActivity(intent);
+                }else if (View ==Stop){
+                    Intent intent = new Intent(MainActivity.this,MyService.class);
+                    startActivity(intent);
+                }
                 Intent intent = new Intent(MainActivity.this, sound.class);
                 startActivity(intent);
             }
@@ -181,4 +198,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

@@ -122,8 +122,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Alarm alert"
-        tools:layout_editor_absoluteX="-38dp"
-        tools:layout_editor_absoluteY="5dp" />
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <Button
         android:id="@+id/btn_alarm"
@@ -141,17 +141,17 @@
 
     <Button
         android:id="@+id/buttonStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="164dp"
+        android:layout_height="58dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="Start Service"
         app:layout_constraintBottom_toBottomOf="@+id/buttonStop"
         app:layout_constraintEnd_toStartOf="@+id/buttonStop"
-        app:layout_constraintHorizontal_bias="0.575"
+        app:layout_constraintHorizontal_bias="0.559"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/enjoy"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.692" />
 
     <Button
         android:id="@+id/buttonStop"
@@ -161,23 +161,10 @@
         android:layout_centerVertical="true"
         android:text="Stop Service"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_alarm"
-        app:layout_constraintVertical_bias="0.313"
-        tools:layout_editor_absoluteX="158dp"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/buttonNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="Next Page"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.552"
-        app:layout_constraintStart_toEndOf="@+id/buttonStop"
-        app:layout_constraintTop_toBottomOf="@+id/btn_alarm" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_alarm"
+        app:layout_constraintVertical_bias="0.325"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
