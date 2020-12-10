@@ -20,8 +20,8 @@ public class MyService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        super.onStartCommand(intent, flags, startId);
-        MediaPlayer player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
+
+        player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI);
         player.setLooping(true);
         player.start();
         return START_STICKY;
@@ -29,7 +29,9 @@ public class MyService extends Service {
 
     @Override
     public void onDestroy() {
+
         super.onDestroy();
+        player.stop();
     }
 }
 

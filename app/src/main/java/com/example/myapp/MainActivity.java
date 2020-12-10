@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //public static String message = "http://www.gmail.com";
     Button play;
     Button alrt;
-    private Button Start, Stop;
+    Button Start, Stop;
     private BroadcastReceiver MyReceiver= new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             //get baterry
@@ -53,25 +53,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         registerReceiver(MyReceiver,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
         Start = (Button) findViewById(R.id.buttonStart);
-        Stop = (Button) findViewById(R.id.buttonStop);
+        Start.setOnClickListener(new View.OnClickListener(){
+                                    @Override
+                                    public void onClick(View v) {
 
-        Start.setOnClickListener((View.OnClickListener) this);
-        Stop.setOnClickListener((View.OnClickListener) this);
+                                        Intent intent = new Intent(MainActivity.this,MyService.class);
+                                        startService(intent);
+                                    }
+                                });
+
+        Stop.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,MyService.class);
+                stopService(intent);
+            }
+        });
+
 
 
         play = findViewById(R.id.enjoy);
         play.setOnClickListener(new View.OnClickListener() {
-            private Object View;
+
 
             @Override
             public void onClick(View v) {
-                if (View == Start){
-                    Intent intent = new Intent(MainActivity.this,MyService.class);
-                    startActivity(intent);
-                }else if (View ==Stop){
-                    Intent intent = new Intent(MainActivity.this,MyService.class);
-                    startActivity(intent);
-                }
+
                 Intent intent = new Intent(MainActivity.this, sound.class);
                 startActivity(intent);
             }
