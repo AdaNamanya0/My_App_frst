@@ -28,47 +28,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static String soccer = "http://www.premierlegue.com";
     public static String football = "http://www.thefa.com";
 
+
     //public static String message = "http://www.gmail.com";
     Button play;
     Button alrt;
     Button Start, Stop;
+
+
+
     private BroadcastReceiver MyReceiver= new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             //get baterry
             int level = intent.getIntExtra("level",0);
             //find the progress bar crtd in the main.xml
-            ProgressBar pb =(ProgressBar)findViewById(R.id.progressBar);
+            ProgressBar pb = findViewById(R.id.progressBar);
             pb.setProgress(level);
 
             //accessing text view controll crtd in main.xml
-            TextView textView=(TextView) findViewById(R.id.power);
-            textView.setText("Baterylevel is at:" + Integer.toString(level) + "%");
+            TextView textView= findViewById(R.id.power);
+            textView.setText("Baterylevel is at:" + level + "%");
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        registerReceiver(MyReceiver,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
 
-        Start = (Button) findViewById(R.id.buttonStart);
-        Start.setOnClickListener(new View.OnClickListener(){
-                                    @Override
-                                    public void onClick(View v) {
-
+ registerReceiver(MyReceiver,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        Start = findViewById(R.id.buttonStart);
+        Start.setOnClickListener(new View.OnClickListener(){         @Override
+        public void onClick(View v) {
                                         Intent intent = new Intent(MainActivity.this,MyService.class);
                                         startService(intent);
-                                    }
-                                });
+                                   }
+                               });
 
-        Stop.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
+        Stop.setOnClickListener(new View.OnClickListener(){            @Override
+           public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,MyService.class);
-                stopService(intent);
-            }
-        });
+               stopService(intent);
+           }
+       });
 
 
 
@@ -87,11 +88,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+
     //dfng a mtd to send alert
     public void alarm(View view) {
-        EditText text = (EditText) findViewById(R.id.alarm);
+        EditText text = findViewById(R.id.alarm);
         int i = Integer.parseInt(text.getText().toString());
-        alrt = (Button)findViewById(R.id.btn_alarm);
+        alrt = findViewById(R.id.btn_alarm);
 
         //crtg the intent and call your receiver
         Intent intent = new Intent(getApplicationContext(), MyReceiver.class);
@@ -110,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void sendMessage(View view) {
-        EditText message = (EditText) findViewById(R.id.message);
+        EditText message = findViewById(R.id.message);
         Toast.makeText(this, "Sending message " + message.getText().toString(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, DisplayMessageActivity.class);
         intent.putExtra("MESSAGE", message.getText().toString());
@@ -143,6 +145,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.progee:
                 startActivity(new Intent(this, best_teams.class));
                 return true;
+            case R.id.interna:
+                startActivity(new Intent(this, internal.class));
+                return true;
+
 
 
 
@@ -153,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case  R.id.send_mail:
                 Intent m = new Intent(Intent.ACTION_SEND);
                 m.setData(Uri.parse("mailto"));
-                String to [] = {"namanyaada0@gmail.com","mupatt@gmail.com","bryntu9@gmail.com"};
+                String[] to = {"namanyaada0@gmail.com","mupatt@gmail.com","bryntu9@gmail.com"};
                 m.putExtra(Intent.EXTRA_EMAIL, to);
                 m.putExtra(Intent.EXTRA_SUBJECT,"GREETINGS");
                 m.putExtra(Intent.EXTRA_TEXT,"hello hope your fine");
@@ -210,8 +216,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
     @Override
     public void onClick(View v) {
 
+    }
+
+    public void save(View view) {
+    }
+
+    public void load(View view) {
     }
 }

@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission." />
+
 
     <application
         android:allowBackup="true"
@@ -20,7 +20,7 @@
             android:name=".MyReceiver"
             android:enabled="true"
             android:exported="true" />
-
+        <activity android:name=".internal" />
         <activity android:name=".list_view1" />
         <activity android:name=".sound" />
         <activity android:name=".best_teams" />

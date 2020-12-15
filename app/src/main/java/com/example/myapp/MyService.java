@@ -3,6 +3,7 @@ package com.example.myapp;
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.IBinder;
 import android.provider.Settings;
 
@@ -33,5 +34,17 @@ public class MyService extends Service {
         super.onDestroy();
         player.stop();
     }
-}
+    private class background extends AsyncTask<String,Void,String> {
+
+        @Override
+        protected String doInBackground(String... strings) {
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+}}
 
