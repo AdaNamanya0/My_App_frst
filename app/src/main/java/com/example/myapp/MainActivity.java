@@ -35,42 +35,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button Start, Stop;
 
 
-
-    private BroadcastReceiver MyReceiver= new BroadcastReceiver() {
+    private BroadcastReceiver MyReceiver = new BroadcastReceiver() {
         public void onReceive(Context context, Intent intent) {
             //get baterry
-            int level = intent.getIntExtra("level",0);
+            int level = intent.getIntExtra("level", 0);
             //find the progress bar crtd in the main.xml
             ProgressBar pb = findViewById(R.id.progressBar);
             pb.setProgress(level);
 
             //accessing text view controll crtd in main.xml
-            TextView textView= findViewById(R.id.power);
+            TextView textView = findViewById(R.id.power);
             textView.setText("Baterylevel is at:" + level + "%");
         }
     };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
- registerReceiver(MyReceiver,new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        registerReceiver(MyReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         Start = findViewById(R.id.buttonStart);
-        Start.setOnClickListener(new View.OnClickListener(){         @Override
-        public void onClick(View v) {
-                                        Intent intent = new Intent(MainActivity.this,MyService.class);
-                                        startService(intent);
-                                   }
-                               });
+        Stop = findViewById(R.id.buttonStop);
+        Start.setOnClickListener(new View.OnClickListener() {
 
-        Stop.setOnClickListener(new View.OnClickListener(){            @Override
-           public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,MyService.class);
-               stopService(intent);
-           }
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyService.class);
+                startService(intent);
+            }
+        });
+        Stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this,MyService.class);
+                startActivity(intent);
+            }
+        });
+
+        Stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyService.class);
+                stopService(intent);
+            }
        });
-
 
 
         play = findViewById(R.id.enjoy);
@@ -148,21 +157,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.interna:
                 startActivity(new Intent(this, internal.class));
                 return true;
-
-
-
+            case R.id.external:
+                startActivity(new Intent(this, external.class));
+                return true;
 
 
             case R.id.list_view:
-        startActivity(new Intent(this,list_view1.class));
-        return true;
-            case  R.id.send_mail:
+                startActivity(new Intent(this, list_view1.class));
+                return true;
+            case R.id.send_mail:
                 Intent m = new Intent(Intent.ACTION_SEND);
                 m.setData(Uri.parse("mailto"));
-                String[] to = {"namanyaada0@gmail.com","mupatt@gmail.com","bryntu9@gmail.com"};
+                String[] to = {"namanyaada0@gmail.com", "mupatt@gmail.com", "bryntu9@gmail.com", "atuhimbise2018@gmail.com"};
                 m.putExtra(Intent.EXTRA_EMAIL, to);
-                m.putExtra(Intent.EXTRA_SUBJECT,"GREETINGS");
-                m.putExtra(Intent.EXTRA_TEXT,"hello hope your fine");
+                m.putExtra(Intent.EXTRA_SUBJECT, "GREETINGS");
+                m.putExtra(Intent.EXTRA_TEXT, "hello hope your fine");
                 m.setType("message/rfc822");
                 startActivity(m);
                 return true;
@@ -192,15 +201,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     Intent intent2 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:0784561422"));
                     startActivity(intent2);
-                }
-                catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 return true;
 
-    }
+        }
         return super.onOptionsItemSelected(club);
-}
+    }
 
     public BroadcastReceiver getMyReceiver() {
         return MyReceiver;
@@ -220,11 +228,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-    }
-
-    public void save(View view) {
-    }
-
-    public void load(View view) {
     }
 }

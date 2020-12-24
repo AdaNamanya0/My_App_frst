@@ -21,6 +21,7 @@
             android:enabled="true"
             android:exported="true" />
         <activity android:name=".internal" />
+        <activity android:name=".external" />
         <activity android:name=".list_view1" />
         <activity android:name=".sound" />
         <activity android:name=".best_teams" />

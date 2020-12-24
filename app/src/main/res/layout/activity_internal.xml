@@ -28,7 +28,8 @@
         android:layout_marginRight="169dp"
         android:layout_marginBottom="99dp"
         android:onClick="save"
-        android:text="Save" />
+        android:text="Save"
+        tools:ignore="OnClick" />
 
     <Button
         android:id="@+id/button_load"
@@ -45,7 +46,8 @@
         android:layout_marginRight="175dp"
         android:layout_marginBottom="140dp"
         android:onClick="load"
-        android:text="load" />
+        android:text="load"
+        tools:ignore="OnClick" />
 
 
 </RelativeLayout>
