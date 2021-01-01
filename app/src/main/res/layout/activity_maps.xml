@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:id="@+id/map"
         tools:context=".MapsActivity"
-        android:name="com.googlemap"
+        android:name="com.google"
         tools:ignore="MissingClass" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
