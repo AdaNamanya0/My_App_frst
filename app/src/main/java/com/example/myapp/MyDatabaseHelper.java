@@ -15,8 +15,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION= 1;
     private static final char factory = 2;
     private static final String name ="";
-    private static final SQLiteDatabase.OpenParams version = ;
 
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, name, factory, version);
     }

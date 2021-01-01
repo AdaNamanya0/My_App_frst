@@ -3,19 +3,25 @@ package com.example.myapp;
 import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +29,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private SensorManager sensorManager;
 
     public static String soccer = "http://www.premierlegue.com";
     public static String football = "http://www.thefa.com";
@@ -49,10 +61,53 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     };
 
+    public MainActivity(SensorManager sensorManager) {
+        this.sensorManager = sensorManager;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+// Get the reference to the sensor manager
+        sensorManager = (SensorManager) getSystemService(Service.SENSOR_SERVICE);
+
+        // Get the list of sensor
+        //List<Sensor> sensorList = sensorManager.getSensorList(Sensor.TYPE_ALL);
+
+        List<Sensor> sensorList = sensorManager.getSensorList(Sensor.TYPE_PRESSURE);
+
+        List<Map<String, String>> sensorData = new ArrayList<Map<String,String>>();
+
+
+        for (Sensor sensor: sensorList) {
+            Map<String, String> data = new HashMap<String, String>();
+            data.put("name", sensor.getName());
+            data.put("vendor", sensor.getVendor());
+            sensorData.add(data);
+        }
+
+
+        SimpleAdapter sa = new SimpleAdapter(this, sensorData, android.R.layout.simple_list_item_2, new String[]{"name", "vendor"}, new int[]{android.R.id.text1, android.R.id.text2});
+
+        ListView lv = (ListView) findViewById(R.id.sensorList);
+        lv.setAdapter(sa);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int pos,
+                                    long id) {
+
+                Intent i = new Intent(MainActivity.this, PressActivity.class);
+                startActivity(i);
+
+            }
+        });
+
+
+
+
 
         registerReceiver(MyReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         Start = findViewById(R.id.buttonStart);
@@ -138,6 +193,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+
+
+
     public boolean onOptionsItemSelected(MenuItem club) {
         int id = club.getItemId();
         switch (id) {
@@ -165,6 +224,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.list_view:
                 startActivity(new Intent(this, list_view1.class));
                 return true;
+            case R.id.press:
+                // Inflate the menu; this adds items to the action bar if it is present.
+                Menu menu = null;
+                getMenuInflater().inflate(R.menu.main, menu);
+                return true;
+
             case R.id.send_mail:
                 Intent m = new Intent(Intent.ACTION_SEND);
                 m.setData(Uri.parse("mailto"));

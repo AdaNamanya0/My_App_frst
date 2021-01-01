@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myapp">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SENSOR" />
 
 
     <application
@@ -25,8 +27,11 @@
         <activity android:name=".list_view1" />
         <activity android:name=".sound" />
         <activity android:name=".best_teams" />
+        <activity android:name=".PressActivity"/>
         <activity android:name=".DisplayMessageActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            tools:ignore="Instantiatable" />
+            tools:ignore="Instantiatable" />
         <activity android:name=".splash_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
